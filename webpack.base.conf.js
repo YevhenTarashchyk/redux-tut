@@ -14,7 +14,7 @@ module.exports = {
     paths: PATHS
   },
   entry: {
-    app: ['babel-polyfill', `${PATHS.src}`]
+    app: `${PATHS.src}`
   },
   output: {
     path: PATHS.dist,
