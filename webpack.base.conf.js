@@ -1,12 +1,12 @@
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CopyPlugin = require("copy-webpack-plugin");
-const path = require("path");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
+const path = require('path');
 
 const PATHS = {
-  src: path.join(__dirname, "./src"),
-  dist: path.join(__dirname, "./dist"),
-  assets: "assets/"
+  src: path.join(__dirname, './src'),
+  dist: path.join(__dirname, './dist'),
+  assets: 'assets/'
 };
 
 module.exports = {
@@ -14,7 +14,7 @@ module.exports = {
     paths: PATHS
   },
   entry: {
-    app: `${PATHS.src}`
+    app: ['babel-polyfill', `${PATHS.src}`]
   },
   output: {
     path: PATHS.dist,
@@ -26,17 +26,17 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader"
+          loader: 'babel-loader'
         }
       },
       {
         test: /\.html$/,
         use: [
           {
-            loader: "html-loader",
+            loader: 'html-loader',
             options: {
               minimize: true,
-              attrs: [":data-src"]
+              attrs: [':data-src']
             }
           }
         ]
@@ -44,11 +44,11 @@ module.exports = {
       {
         test: /\.(png|svg|jpe?g|gif)$/i,
         use: [
-          "file-loader",
+          'file-loader',
           {
-            loader: "image-webpack-loader",
+            loader: 'image-webpack-loader',
             options: {
-              name: "[name].[ext]",
+              name: '[name].[ext]',
               bypassOnDebug: true,
               disable: true
             }
@@ -58,21 +58,21 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [
-          "style-loader",
+          'style-loader',
           MiniCssExtractPlugin.loader,
           {
-            loader: "css-loader",
+            loader: 'css-loader',
             options: { sourceMap: true }
           },
           {
-            loader: "postcss-loader",
+            loader: 'postcss-loader',
             options: {
               sourceMap: true,
-              config: { path: "./postcss.config.js" }
+              config: { path: './postcss.config.js' }
             }
           },
           {
-            loader: "sass-loader",
+            loader: 'sass-loader',
             options: { sourceMap: true }
           }
         ]
@@ -80,26 +80,26 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          "style-loader",
+          'style-loader',
           MiniCssExtractPlugin.loader,
           {
-            loader: "css-loader",
+            loader: 'css-loader',
             options: { sourceMap: true }
           },
           {
-            loader: "postcss-loader",
+            loader: 'postcss-loader',
             options: {
               sourceMap: true,
-              config: { path: "./postcss.config.js" }
+              config: { path: './postcss.config.js' }
             }
           }
         ]
       },
       {
         test: /.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-        loader: "file-loader",
+        loader: 'file-loader',
         options: {
-          name: "[path][name].[ext]"
+          name: '[path][name].[ext]'
         }
       }
     ]
@@ -108,7 +108,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       hash: false,
       template: `${PATHS.src}/public/index.html`,
-      inject: "body"
+      inject: 'body'
     }),
     new MiniCssExtractPlugin({
       filename: `${PATHS.assets}css/styles.css`,

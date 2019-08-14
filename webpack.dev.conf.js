@@ -7,14 +7,14 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   devtool: 'cheap-module-eval-source-map',
   devServer: {
     contentBase: baseWebpackConfig.externals.paths.dist,
-    port: 7701,
-    compress: true,
+    port: 6565,
+    compress: true
   },
   plugins: [
     new webpack.SourceMapDevToolPlugin({
-      filename: '[file].map',
-    }),
-  ],
+      filename: '[file].map'
+    })
+  ]
 });
 
 module.exports = new Promise((resolve, reject) => {

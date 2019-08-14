@@ -18,14 +18,15 @@
     "react/forbid-prop-types": "off",
     "react/destructuring-assignment": "off",
     "no-unused-vars": "off",
+    "react/prefer-stateless-function": "off",
     "no-plusplus": [
       "error",
       {
         "allowForLoopAfterthoughts": true
       }
     ],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "no-console": "off",
-    "func-names": "off",
-    "react/jsx-filename-extension": [0, { "extensions": [".js", ".jsx"] }]
+    "func-names": "off"
   }
 }
