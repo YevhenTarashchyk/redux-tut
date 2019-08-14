@@ -8,7 +8,8 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   devServer: {
     contentBase: baseWebpackConfig.externals.paths.dist,
     port: 6565,
-    compress: true
+    compress: true,
+    historyApiFallback: true
   },
   plugins: [
     new webpack.SourceMapDevToolPlugin({
