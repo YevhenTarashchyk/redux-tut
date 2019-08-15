@@ -4,7 +4,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 const path = require('path');
 
 const PATHS = {
-  src: path.join(__dirname, './src'),
+  src: path.join(__dirname, '/src'),
   dist: path.join(__dirname, './dist'),
   assets: 'assets/'
 };
@@ -14,11 +14,12 @@ module.exports = {
     paths: PATHS
   },
   entry: {
-    app: `${PATHS.src}`
+    app: ['babel-polyfill', `${PATHS.src}`]
   },
   output: {
     path: PATHS.dist,
-    filename: `${PATHS.assets}js/bundle.js`
+    filename: `${PATHS.assets}js/bundle.js`,
+    publicPath: '/'
   },
   module: {
     rules: [

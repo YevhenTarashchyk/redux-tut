@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import * as R from 'ramda';
 import { Link } from 'react-router-dom';
 
-import { fetchPhones, loadMorePhones } from '../../actions/Actions';
+import * as phoneActions from '../../actions/Actions';
 import { getPhones } from '../../selectors';
 import Layout from '../layout/Layout';
 
@@ -15,6 +15,7 @@ class Phones extends Component {
 
   renderPhone = (phone, index) => {
     const shortDescription = `${R.take(60, phone.description)}...`;
+    const { addPhoneToBasket } = this.props;
     return (
       <div className="col-md-4 col-lg-4 col-sm-4 book-list" key={index}>
         <div className="thumbnail">
@@ -26,7 +27,11 @@ class Phones extends Component {
             </h4>
             <p>{shortDescription}</p>
             <p className="itemButton">
-              <button className="btn btn-primary" type="button">
+              <button
+                className="btn btn-primary"
+                type="button"
+                onClick={() => addPhoneToBasket(phone.id)}
+              >
                 Buy now!
               </button>
               <Link to={`/phones/${phone.id}`} className="btn btn-default">
@@ -40,7 +45,7 @@ class Phones extends Component {
   };
 
   render() {
-    const { phones } = this.props;
+    const { phones, loadMorePhones } = this.props;
     return (
       <Layout>
         <div className="books row">
@@ -49,7 +54,7 @@ class Phones extends Component {
         <div className="row">
           <div className="col-md-12">
             <button
-              onClick={this.props.loadMorePhones}
+              onClick={loadMorePhones}
               className="pull-right btn btn-primary"
               type="button"
             >
@@ -63,8 +68,9 @@ class Phones extends Component {
 }
 
 const mapDispatchToProps = {
-  fetchPhones,
-  loadMorePhones
+  fetchPhones: phoneActions.fetchPhones,
+  loadMorePhones: phoneActions.loadMorePhones,
+  addPhoneToBasket: phoneActions.addPhoneToBasket
 };
 
 const mapStateToProps = state => ({
@@ -79,5 +85,6 @@ export default connect(
 Phones.propTypes = {
   fetchPhones: PropTypes.func.isRequired,
   phones: PropTypes.array.isRequired,
-  loadMorePhones: PropTypes.func.isRequired
+  loadMorePhones: PropTypes.func.isRequired,
+  addPhoneToBasket: PropTypes.func.isRequired
 };
