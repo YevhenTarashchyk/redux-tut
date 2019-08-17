@@ -5,6 +5,7 @@ import phonesPage from './phonespage';
 import phones from './phones-reducer';
 import singlePhonePage from './singlePhonePage';
 import basket from './basket-reducer';
+import categories from './categories';
 
 export default history =>
   combineReducers({
@@ -12,5 +13,6 @@ export default history =>
     phones,
     phonesPage,
     singlePhonePage,
-    basket
+    basket,
+    categories
   });

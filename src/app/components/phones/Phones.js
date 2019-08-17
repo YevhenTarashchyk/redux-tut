@@ -11,6 +11,7 @@ import Layout from '../layout/Layout';
 class Phones extends Component {
   componentDidMount() {
     this.props.fetchPhones();
+    this.props.fetchCategories();
   }
 
   renderPhone = (phone, index) => {
@@ -70,11 +71,12 @@ class Phones extends Component {
 const mapDispatchToProps = {
   fetchPhones: phoneActions.fetchPhones,
   loadMorePhones: phoneActions.loadMorePhones,
-  addPhoneToBasket: phoneActions.addPhoneToBasket
+  addPhoneToBasket: phoneActions.addPhoneToBasket,
+  fetchCategories: phoneActions.fetchCategories
 };
 
-const mapStateToProps = state => ({
-  phones: getPhones(state)
+const mapStateToProps = (state, ownProps) => ({
+  phones: getPhones(state, ownProps)
 });
 
 export default connect(
@@ -86,5 +88,6 @@ Phones.propTypes = {
   fetchPhones: PropTypes.func.isRequired,
   phones: PropTypes.array.isRequired,
   loadMorePhones: PropTypes.func.isRequired,
-  addPhoneToBasket: PropTypes.func.isRequired
+  addPhoneToBasket: PropTypes.func.isRequired,
+  fetchCategories: PropTypes.func.isRequired
 };
