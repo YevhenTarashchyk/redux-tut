@@ -1,28 +1,19 @@
-import * as R from 'ramda';
-import phones from './mockPhones';
-import categories from './mockCategories';
+import { db } from '../../config/fbConfig';
 
 export const fetchPhones = async () => {
-  return new Promise(resolve => {
-    resolve(phones);
-  });
-};
-
-export const loadMorePhones = async ({ offset }) => {
-  return new Promise(resolve => {
-    resolve(phones);
-  });
+  const dbRef = await db.collection('phones').get();
+  return dbRef.docs.map(doc => doc.data());
 };
 
 export const fetchPhoneById = async id => {
-  return new Promise((resolve, reject) => {
-    const phone = R.find(R.propEq('id', id), phones);
-    resolve(phone);
-  });
+  const selected = await db
+    .collection('phones')
+    .where('id', '==', id)
+    .get();
+  return selected.docs.map(doc => doc.data());
 };
 
 export const fetchCategories = async () => {
-  return new Promise(resolve => {
-    resolve(categories);
-  });
+  const dbRef = await db.collection('categories').get();
+  return dbRef.docs.map(doc => doc.data());
 };

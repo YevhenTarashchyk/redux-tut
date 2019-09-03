@@ -5,8 +5,8 @@ import * as R from 'ramda';
 import { Link } from 'react-router-dom';
 
 import * as phoneActions from '../../actions/Actions';
-import { getPhoneById } from '../../selectors';
 import BasketCard from '../basketCard/basketCard';
+import { getPhoneById } from '../../selectors';
 
 class Phone extends Component {
   componentDidMount() {
@@ -66,7 +66,7 @@ class Phone extends Component {
         <BasketCard />
         <div className="form-group">
           <h1>{phone.name}</h1>
-          <h2>{phone.price}</h2>
+          <h2>{`${phone.price} $`}</h2>
         </div>
         <Link to="/" className="btn btn-info btn-block">
           Back to store
@@ -84,6 +84,7 @@ class Phone extends Component {
 
   render() {
     const { phone } = this.props;
+
     return (
       <div className="view-container">
         <div className="container">
@@ -106,13 +107,14 @@ const mapStateToProps = state => {
     phone: getPhoneById(state, state.singlePhonePage.id)
   };
 };
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Phone);
 
 Phone.defaultProps = {
-  phone: {}
+  phone: undefined
 };
 Phone.propTypes = {
   fetchPhoneById: PropTypes.func.isRequired,

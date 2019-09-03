@@ -1,11 +1,5 @@
 import React, { Component } from 'react';
 
-// import { Router, Route } from 'react-router-dom';
-// import configureStore, { history } from './configureStore';
-
-// import Phones from './components/phones/Phones';
-// import Phone from './components/phone/Phone';
-
 import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
@@ -23,7 +17,6 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(...middlewares))
 );
 
-// const store = configureStore();
 class App extends Component {
   render() {
     return (

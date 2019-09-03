@@ -21,7 +21,6 @@ export const getPhones = (state, ownProps) => {
   )(state.phonesPage.ids);
   return phones;
 };
-export const getRenderedPhonesLength = state => R.length(state.phonesPage.ids);
 
 export const getTotalBasketCount = state => R.length(state.basket);
 

@@ -27,6 +27,7 @@
     ],
     "react/jsx-filename-extension": [0, { "extensions": [".js", ".jsx"] }],
     "no-console": "off",
+    "no-alert": "off",
     "func-names": "off"
   }
 }

@@ -49,7 +49,7 @@ const Basket = ({
         <div className="row">
           <div className="pull-right total-user-checkout">
             <b>Total:</b>
-            {`${totalPrice}`}
+            {` ${totalPrice}$`}
           </div>
         </div>
       )}

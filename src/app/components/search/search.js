@@ -18,6 +18,9 @@ class Search extends Component {
   handleSubmit = e => {
     e.preventDefault();
     this.props.searchPhone(this.state.value);
+    this.setState({
+      value: ''
+    });
   };
 
   render() {
@@ -28,12 +31,17 @@ class Search extends Component {
           <form onSubmit={this.handleSubmit}>
             <input
               type="text"
+              value={this.state.value}
               onChange={this.handleChange}
               className="form-control"
             />
           </form>
           <span className="input-group-btn">
-            <button type="submit" className="btn btn-default">
+            <button
+              type="submit"
+              className="btn btn-default"
+              onClick={this.handleSubmit}
+            >
               <span className="glyphicon glyphicon-search" />
             </button>
           </span>

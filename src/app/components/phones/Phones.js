@@ -9,10 +9,20 @@ import { getPhones } from '../../selectors';
 import Layout from '../layout/Layout';
 
 class Phones extends Component {
+  state = {
+    visibleComponents: 3
+  };
+
   componentDidMount() {
     this.props.fetchPhones();
     this.props.fetchCategories();
   }
+
+  loadMorePhones = () => {
+    this.setState(prev => {
+      return { visibleComponents: prev.visibleComponents + 3 };
+    });
+  };
 
   renderPhone = (phone, index) => {
     const shortDescription = `${R.take(60, phone.description)}...`;
@@ -46,21 +56,26 @@ class Phones extends Component {
   };
 
   render() {
-    const { phones, loadMorePhones } = this.props;
+    const { phones } = this.props;
+    const { visibleComponents } = this.state;
     return (
       <Layout>
         <div className="books row">
-          {phones.map((phone, index) => this.renderPhone(phone, index))}
+          {phones
+            .slice(0, visibleComponents)
+            .map((phone, index) => this.renderPhone(phone, index))}
         </div>
         <div className="row">
           <div className="col-md-12">
-            <button
-              onClick={loadMorePhones}
-              className="pull-right btn btn-primary"
-              type="button"
-            >
-              Load More
-            </button>
+            {visibleComponents < phones.length && (
+              <button
+                onClick={this.loadMorePhones}
+                className="pull-right btn btn-primary"
+                type="button"
+              >
+                Load More
+              </button>
+            )}
           </div>
         </div>
       </Layout>
@@ -70,7 +85,6 @@ class Phones extends Component {
 
 const mapDispatchToProps = {
   fetchPhones: phoneActions.fetchPhones,
-  loadMorePhones: phoneActions.loadMorePhones,
   addPhoneToBasket: phoneActions.addPhoneToBasket,
   fetchCategories: phoneActions.fetchCategories
 };
@@ -87,7 +101,6 @@ export default connect(
 Phones.propTypes = {
   fetchPhones: PropTypes.func.isRequired,
   phones: PropTypes.array.isRequired,
-  loadMorePhones: PropTypes.func.isRequired,
   addPhoneToBasket: PropTypes.func.isRequired,
   fetchCategories: PropTypes.func.isRequired
 };
